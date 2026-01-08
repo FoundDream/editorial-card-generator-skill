@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claude Skills - Editorial Cards</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@700;900&family=Noto+Sans+SC:wght@400;500;700&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #e8e4dc;
+            min-height: 100vh;
+            padding: 60px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            justify-content: center;
+            align-items: flex-start;
+            font-family: 'Noto Sans SC', sans-serif;
+        }
+
+        .card {
+            width: 600px;
+            height: 800px;
+            background: #f2efe9;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.4);
+            flex-shrink: 0;
+        }
+
+        /* SVG Noise Overlay */
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+            opacity: 0.06;
+            pointer-events: none;
+            mix-blend-mode: multiply;
+            z-index: 1;
+        }
+
+        .card-content {
+            position: relative;
+            z-index: 2;
+            height: 100%;
+        }
+
+        /* Dark Mode Card */
+        .card.dark {
+            background: #1a1a1a;
+        }
+
+        .card.dark .text-primary {
+            color: #f2efe9;
+        }
+
+        .card.dark .text-secondary {
+            color: #c4c4c4;
+        }
+
+        .card.dark .accent-color {
+            color: #d95e00;
+        }
+
+        /* Export Button */
+        .export-btn {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            background: #d95e00;
+            color: #f2efe9;
+            border: none;
+            padding: 14px 28px;
+            font-size: 15px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(217, 94, 0, 0.4);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            font-family: 'Noto Sans SC', sans-serif;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .export-btn:hover {
+            background: #c54d00;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(217, 94, 0, 0.5);
+        }
+
+        .export-progress {
+            position: fixed;
+            top: 90px;
+            right: 30px;
+            background: rgba(26, 26, 26, 0.95);
+            color: #f2efe9;
+            padding: 16px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            z-index: 999;
+            display: none;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Typography */
+        .text-primary {
+            color: #1a1a1a;
+        }
+
+        .text-secondary {
+            color: #4a4a4a;
+        }
+
+        .accent-color {
+            color: #d95e00;
+        }
+
+        .font-display {
+            font-family: 'Oswald', sans-serif;
+        }
+
+        .font-serif {
+            font-family: 'Noto Serif SC', serif;
+        }
+
+        .number-large {
+            font-size: 180px;
+            font-weight: 700;
+            line-height: 1;
+            letter-spacing: -4px;
+        }
+
+        /* Decorative Elements */
+        .corner-decoration {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            border: 3px solid #d95e00;
+            opacity: 0.3;
+        }
+
+        .corner-decoration.top-left {
+            top: 30px;
+            left: 30px;
+            border-right: none;
+            border-bottom: none;
+        }
+
+        .corner-decoration.bottom-right {
+            bottom: 30px;
+            right: 30px;
+            border-left: none;
+            border-top: none;
+        }
+
+        .line-accent {
+            width: 60px;
+            height: 4px;
+            background: #d95e00;
+        }
+    </style>
+</head>
+<body>
+    <button class="export-btn" onclick="exportAllCards()">
+        <i class="fas fa-download"></i>
+        Export All Cards
+    </button>
+    <div class="export-progress" id="exportProgress">Exporting... 0/5</div>
+
+    <!-- Card 1: Cover -->
+    <div class="card" id="card-1">
+        <div class="corner-decoration top-left"></div>
+        <div class="card-content flex flex-col justify-center items-center px-16 text-center">
+            <div class="mb-6">
+                <span class="text-6xl font-display accent-color tracking-wider">SKILLS</span>
+            </div>
+            <div class="line-accent mb-8"></div>
+            <h1 class="text-7xl font-black text-primary leading-tight mb-6 font-serif">
+                Extend Claude<br>Capabilities
+            </h1>
+            <p class="text-xl text-secondary leading-relaxed max-w-md">
+                Custom automations that transform your development workflow
+            </p>
+            <div class="absolute bottom-12 left-0 right-0 flex justify-center">
+                <span class="text-sm text-secondary tracking-widest uppercase">01 — 05</span>
+            </div>
+        </div>
+        <div class="corner-decoration bottom-right"></div>
+    </div>
+
+    <!-- Card 2: Benefits -->
+    <div class="card" id="card-2">
+        <div class="corner-decoration top-left"></div>
+        <div class="card-content flex flex-col px-16 py-20">
+            <div class="mb-4">
+                <span class="text-sm accent-color font-bold tracking-widest uppercase">Why Skills?</span>
+            </div>
+            <h2 class="text-5xl font-black text-primary leading-tight mb-12 font-serif">
+                Three Benefits<br>That Matter
+            </h2>
+
+            <div class="space-y-10 flex-grow">
+                <div class="flex items-start gap-6">
+                    <div class="text-6xl font-display accent-color leading-none">01</div>
+                    <div class="flex-grow pt-2">
+                        <h3 class="text-2xl font-bold text-primary mb-2">Save Time</h3>
+                        <p class="text-lg text-secondary leading-relaxed">Automate routine development tasks with precision</p>
+                    </div>
+                </div>
+
+                <div class="flex items-start gap-6">
+                    <div class="text-6xl font-display accent-color leading-none">02</div>
+                    <div class="flex-grow pt-2">
+                        <h3 class="text-2xl font-bold text-primary mb-2">Consistency</h3>
+                        <p class="text-lg text-secondary leading-relaxed">Ensure uniform code quality across all projects</p>
+                    </div>
+                </div>
+
+                <div class="flex items-start gap-6">
+                    <div class="text-6xl font-display accent-color leading-none">03</div>
+                    <div class="flex-grow pt-2">
+                        <h3 class="text-2xl font-bold text-primary mb-2">Customization</h3>
+                        <p class="text-lg text-secondary leading-relaxed">Tailor Claude to your specific development needs</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="corner-decoration bottom-right"></div>
+    </div>
+
+    <!-- Card 3: How It Works (Dark Mode) -->
+    <div class="card dark" id="card-3">
+        <div class="card-content flex flex-col px-16 py-20">
+            <div class="mb-4">
+                <span class="text-sm accent-color font-bold tracking-widest uppercase">The Process</span>
+            </div>
+            <h2 class="text-5xl font-black text-primary leading-tight mb-12 font-serif">
+                How Skills<br>Work
+            </h2>
+
+            <div class="space-y-8 flex-grow">
+                <div class="flex items-start gap-5">
+                    <div class="w-16 h-16 rounded-full border-2 border-orange-500 flex items-center justify-center flex-shrink-0">
+                        <span class="text-2xl font-bold accent-color font-display">1</span>
+                    </div>
+                    <div class="flex-grow pt-3">
+                        <h3 class="text-xl font-bold text-primary mb-1">Create Definition</h3>
+                        <p class="text-base text-secondary">Write skill definition in markdown format</p>
+                    </div>
+                </div>
+
+                <div class="flex items-start gap-5">
+                    <div class="w-16 h-16 rounded-full border-2 border-orange-500 flex items-center justify-center flex-shrink-0">
+                        <span class="text-2xl font-bold accent-color font-display">2</span>
+                    </div>
+                    <div class="flex-grow pt-3">
+                        <h3 class="text-xl font-bold text-primary mb-1">Set Triggers</h3>
+                        <p class="text-base text-secondary">Define when the skill should activate</p>
+                    </div>
+                </div>
+
+                <div class="flex items-start gap-5">
+                    <div class="w-16 h-16 rounded-full border-2 border-orange-500 flex items-center justify-center flex-shrink-0">
+                        <span class="text-2xl font-bold accent-color font-display">3</span>
+                    </div>
+                    <div class="flex-grow pt-3">
+                        <h3 class="text-xl font-bold text-primary mb-1">Configure Tools</h3>
+                        <p class="text-base text-secondary">Specify what tools the skill can use</p>
+                    </div>
+                </div>
+
+                <div class="flex items-start gap-5">
+                    <div class="w-16 h-16 rounded-full border-2 border-orange-500 flex items-center justify-center flex-shrink-0">
+                        <span class="text-2xl font-bold accent-color font-display">4</span>
+                    </div>
+                    <div class="flex-grow pt-3">
+                        <h3 class="text-xl font-bold text-primary mb-1">Add Instructions</h3>
+                        <p class="text-base text-secondary">Provide detailed guidance for Claude</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Card 4: Use Cases -->
+    <div class="card" id="card-4">
+        <div class="corner-decoration top-left"></div>
+        <div class="card-content flex flex-col px-16 py-20">
+            <div class="mb-4">
+                <span class="text-sm accent-color font-bold tracking-widest uppercase">Applications</span>
+            </div>
+            <h2 class="text-5xl font-black text-primary leading-tight mb-12 font-serif">
+                What You Can<br>Build
+            </h2>
+
+            <div class="grid grid-cols-2 gap-6 flex-grow">
+                <div class="border-l-4 border-orange-500 pl-5 py-2">
+                    <h3 class="text-xl font-bold text-primary mb-2">Code Generation</h3>
+                    <p class="text-base text-secondary">Automated boilerplate and patterns</p>
+                </div>
+
+                <div class="border-l-4 border-orange-500 pl-5 py-2">
+                    <h3 class="text-xl font-bold text-primary mb-2">Refactoring</h3>
+                    <p class="text-base text-secondary">Smart code restructuring</p>
+                </div>
+
+                <div class="border-l-4 border-orange-500 pl-5 py-2">
+                    <h3 class="text-xl font-bold text-primary mb-2">Documentation</h3>
+                    <p class="text-base text-secondary">Auto-generate docs and guides</p>
+                </div>
+
+                <div class="border-l-4 border-orange-500 pl-5 py-2">
+                    <h3 class="text-xl font-bold text-primary mb-2">Testing</h3>
+                    <p class="text-base text-secondary">Automated test creation</p>
+                </div>
+
+                <div class="border-l-4 border-orange-500 pl-5 py-2">
+                    <h3 class="text-xl font-bold text-primary mb-2">Validation</h3>
+                    <p class="text-base text-secondary">Quality checks & reviews</p>
+                </div>
+
+                <div class="border-l-4 border-orange-500 pl-5 py-2">
+                    <h3 class="text-xl font-bold text-primary mb-2">Configuration</h3>
+                    <p class="text-base text-secondary">Project setup automation</p>
+                </div>
+            </div>
+        </div>
+        <div class="corner-decoration bottom-right"></div>
+    </div>
+
+    <!-- Card 5: Outro -->
+    <div class="card" id="card-5">
+        <div class="corner-decoration top-left"></div>
+        <div class="card-content flex flex-col justify-center items-center px-16 text-center">
+            <div class="mb-8">
+                <span class="text-lg accent-color font-bold tracking-widest uppercase">Best Practice</span>
+            </div>
+            <div class="line-accent mb-10"></div>
+
+            <h2 class="text-4xl font-black text-primary leading-tight mb-8 font-serif max-w-lg">
+                Start Small.<br>Iterate Fast.<br>Solve Real Problems.
+            </h2>
+
+            <p class="text-xl text-secondary leading-relaxed max-w-md mb-12">
+                The best skills focus on specific, well-defined tasks rather than trying to do everything.
+            </p>
+
+            <div class="border-t-2 border-orange-500 pt-8 mt-6">
+                <p class="text-base text-secondary italic">
+                    Build skills that solve real problems you face every day.
+                </p>
+            </div>
+
+            <div class="absolute bottom-12 left-0 right-0 flex justify-center">
+                <span class="text-sm text-secondary tracking-widest uppercase">05 — 05</span>
+            </div>
+        </div>
+        <div class="corner-decoration bottom-right"></div>
+    </div>
+
+    <script>
+        async function exportAllCards() {
+            const cards = document.querySelectorAll('.card');
+            const progressDiv = document.getElementById('exportProgress');
+            const totalCards = cards.length;
+
+            progressDiv.style.display = 'block';
+
+            for (let i = 0; i < totalCards; i++) {
+                progressDiv.textContent = `Exporting... ${i + 1}/${totalCards}`;
+                const card = cards[i];
+
+                try {
+                    const canvas = await html2canvas(card, {
+                        scale: 2,
+                        backgroundColor: null,
+                        logging: false,
+                        useCORS: true,
+                        allowTaint: true
+                    });
+
+                    canvas.toBlob(blob => {
+                        const url = URL.createObjectURL(blob);
+                        const link = document.createElement('a');
+                        link.download = `claude-skills-card-${i + 1}.png`;
+                        link.href = url;
+                        link.click();
+                        URL.revokeObjectURL(url);
+                    });
+                } catch (error) {
+                    console.error(`Error exporting card ${i + 1}:`, error);
+                }
+
+                await new Promise(resolve => setTimeout(resolve, 500));
+            }
+
+            progressDiv.textContent = `Complete! ${totalCards} cards exported.`;
+
+            setTimeout(() => {
+                progressDiv.style.display = 'none';
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
