@@ -11,6 +11,33 @@ Claude Code 技能，将您的内容转化为美观的杂志风格信息卡片�
 
 ---
 
+## ✨ 示例输出
+
+<div align="center">
+
+### 30 秒生成，来自这段文本：
+
+> "Claude Skills 是 Claude Code 的自定义能力扩展。主要优势：节省时间、保持一致性、高度定制化。工作流程：创建定义 → 设置触发 → 配置工具 → 添加指令。应用场景：代码生成、重构、文档自动化、测试验证、配置。"
+
+**输出：** 4 张出版级卡片
+
+<table>
+  <tr>
+    <td><img src="assets/claude-skills-card-1.png" alt="封面卡片" width="280"/></td>
+    <td><img src="assets/claude-skills-card-2.png" alt="优势卡片" width="280"/></td>
+  </tr>
+  <tr>
+    <td><img src="assets/claude-skills-card-3.png" alt="工作原理卡片" width="280"/></td>
+    <td><img src="assets/claude-skills-card-4.png" alt="应用场景卡片" width="280"/></td>
+  </tr>
+</table>
+
+_零设计技能。一键导出。出版级质量。_
+
+</div>
+
+---
+
 ## 为什么需要这个技能？
 
 内容创作者面临普遍问题：
@@ -108,7 +135,9 @@ Tailwind CSS 裁员 75% 员工。收入下降 80%，因为
 
 **输出：** 每条推文成为一张可分享卡片，风格统一
 
-## 设计系统
+---
+
+## 🎨 设计系统
 
 每张卡片遵循严格设计原则：
 

@@ -1,6 +1,6 @@
 ## Editorial Card Generator
 
-> __Turn text into stunning editorial-style infographics__ — with zero design effort.
+> **Turn text into stunning editorial-style infographics** — with zero design effort.
 
 A Claude Code skill that transforms your content into beautiful, magazine-style information cards. Perfect for social media, presentations, or knowledge sharing.
 
@@ -11,14 +11,43 @@ A Claude Code skill that transforms your content into beautiful, magazine-style 
 
 ---
 
+---
+
+## ✨ Example Output
+
+<div align="center">
+
+### Generated in 30 seconds from this text:
+
+> "Claude Skills are custom capabilities for Claude Code. Key benefits: Save Time, Consistency, Customization. How it works: Create Definition → Set Triggers → Configure Tools → Add Instructions. Use cases: Code generation, refactoring, documentation automation, testing, validation, configuration."
+
+**Output:** 4 publication-ready cards
+
+<table>
+  <tr>
+    <td><img src="assets/claude-skills-card-1.png" alt="Cover Card" width="280"/></td>
+    <td><img src="assets/claude-skills-card-2.png" alt="Benefits Card" width="280"/></td>
+  </tr>
+  <tr>
+    <td><img src="assets/claude-skills-card-3.png" alt="How It Works Card" width="280"/></td>
+    <td><img src="assets/claude-skills-card-4.png" alt="Use Cases Card" width="280"/></td>
+  </tr>
+</table>
+
+_Zero design skills. One-click export. Publication quality._
+
+</div>
+
+---
+
 ## Why This Skill?
 
 Content creators face a universal problem:
 
-- __Design is hard__ — Not everyone can create professional visuals
-- __Tools are expensive__ — Figma, Canva, and Adobe require subscriptions
-- __Time is scarce__ — Learning design takes away from creating content
-- __Consistency suffers__ — Each design looks different from the last
+- **Design is hard** — Not everyone can create professional visuals
+- **Tools are expensive** — Figma, Canva, and Adobe require subscriptions
+- **Time is scarce** — Learning design takes away from creating content
+- **Consistency suffers** — Each design looks different from the last
 
 This skill solves all of that with a single command.
 
@@ -36,13 +65,13 @@ You click: "Export All Cards" → 4 high-res PNGs downloaded
 
 ## What Makes It Different?
 
-| Feature | This Skill | Traditional Tools |
-|---------|-----------|-------------------|
-| __Learning curve__ | Zero (just describe) | Steep |
-| __Cost__ | Free | $10-60/month |
-| __Time per design__ | ~30 seconds | Hours |
-| __Consistency__ | Automatic (design system) | Manual effort |
-| __Export quality__ | 2x resolution PNG | Varies |
+| Feature             | This Skill                | Traditional Tools |
+| ------------------- | ------------------------- | ----------------- |
+| **Learning curve**  | Zero (just describe)      | Steep             |
+| **Cost**            | Free                      | $10-60/month      |
+| **Time per design** | ~30 seconds               | Hours             |
+| **Consistency**     | Automatic (design system) | Manual effort     |
+| **Export quality**  | 2x resolution PNG         | Varies            |
 
 ## Installation
 
@@ -108,16 +137,20 @@ Turn this twitter thread into cards:
 
 **Output:** Each tweet becomes a shareable card with consistent branding
 
-## Design System
+---
+
+## 🎨 Design System
 
 Every card follows strict design principles:
 
 ### The Style
+
 - **Movement**: Modern Editorial + Swiss International Style
 - **Philosophy**: Order, contrast, large typography, paper texture
 - **Format**: 600px × 800px (3:4 ratio) — perfect for Instagram, Twitter
 
 ### The Colors
+
 ```
 Background: #f2efe9  (Warm cream paper)
 Text:       #1a1a1a  (Deep charcoal)
@@ -125,11 +158,13 @@ Accent:     #d95e00  (Hermès orange)
 ```
 
 ### The Typography
+
 - **Noto Serif SC** (700, 900) — Headlines
 - **Noto Sans SC** (400, 500, 700) — Body text
 - **Oswald** (500, 700) — Numbers and English
 
 ### The Texture
+
 - SVG noise overlay (opacity 0.06) for paper feel
 - Deep shadows (25px blur) for floating effect
 - Subtle gradients and opacity shifts
@@ -139,16 +174,19 @@ Accent:     #d95e00  (Hermès orange)
 The skill intelligently divides content across 3-6 cards:
 
 ### Card 1: The Cover
+
 - Massive percentage or key number
 - Bold headline (48-56px)
 - Short tagline
 
 ### Card 2-N: Content
+
 - **List cards**: Numbered sections (01/02/03)
 - **Data cards**: Dark background, large stats, key quotes
 - **Mixed layout**: Text + visual elements
 
 ### Card N: The Outro
+
 - Summary or call-to-action
 - Generous whitespace
 - Thoughtful closing
@@ -175,7 +213,7 @@ editorial-card-generator/
 
 ## When to Use
 
-__Perfect for:__
+**Perfect for:**
 
 - Social media content (Instagram, Twitter, LinkedIn)
 - Educational materials and tutorials
@@ -184,7 +222,7 @@ __Perfect for:__
 - Knowledge sharing
 - Thread summarization
 
-__Skip for:__
+**Skip for:**
 
 - Complex data visualization (use charts)
 - Video content
@@ -206,6 +244,7 @@ Contributions welcome! Please:
 3. Submit a pull request
 
 Ideas for contributions:
+
 - New color themes
 - Additional card layouts
 - More examples
